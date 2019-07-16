@@ -11,7 +11,7 @@ describe('Main App Tests', function() {
   });
 
   it('more calculation', function() {
-    assert.equal(40 + 2, 13);
+    assert.equal(40 + 2, 42);
   });
 
   // fail
