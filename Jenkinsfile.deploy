@@ -1,0 +1,43 @@
+ARCHIVE_FILENAME="my-app.tar.gz"
+DEPLOY_DIR = 'deploy'
+
+pipeline {
+  agent any
+
+  options {
+    timestamps()
+    buildDiscarder(logRotator(numToKeepStr: '2'))
+  }
+
+  stages {
+
+    stage('Clean up Deploy directoy') {
+      steps {
+        sh "rm -rf deploy"
+      }
+    }
+
+    stage('Get and Unpack Artifact') {
+      steps {
+        copyArtifacts projectName: 'my-app', target: 'artifacts', flatten: true
+        sh "mkdir -p ${DEPLOY_DIR}"
+        sh "tar -xf ./artifacts/${ARCHIVE_FILENAME} -C ./${DEPLOY_DIR} && rm ./artifacts/${ARCHIVE_FILENAME}"
+      }
+    }
+
+    stage('Build and Deploy Container') {
+      steps {
+        sh "docker-compose down"
+        sh "docker-compose up -d --build"
+      }
+    }
+  }
+  post {
+    success{
+      echo "======== pipeline executed successfully ========"
+    }
+    failure{
+      echo "======== pipeline execution failed ========"
+    }
+  }
+}

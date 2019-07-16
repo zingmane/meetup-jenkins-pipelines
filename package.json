@@ -1,0 +1,29 @@
+{
+  "name": "simple-node-app",
+  "version": "1.0.0",
+  "description": "simple node app",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "jenkins-mocha src/*.test.js",
+    "start": "node src/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://zingmane@bitbucket.org/zingmane/jenkins-node-pipeline-test.git"
+  },
+  "keywords": [
+    "jenkins",
+    "docker",
+    "dockerfile",
+    "node"
+  ],
+  "author": "mz@campudus.com",
+  "license": "MIT",
+  "devDependencies": {
+    "jenkins-mocha": "^8.0.0",
+    "test": "0.6.0"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

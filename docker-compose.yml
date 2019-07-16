@@ -1,0 +1,9 @@
+version: "3"
+services:
+  my-app:
+    build: .
+    image: my-app
+    container_name: my-app-1
+    user: "node"
+    ports:
+      - "3333:8000"
