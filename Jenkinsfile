@@ -10,14 +10,6 @@ pipeline {
     }
   }
 
-  triggers {
-    GenericTrigger(
-     causeString: 'Triggered with local commit',
-     token: 'very_secret',
-     silentResponse: true,
-    )
-  }
-
   options {
     timestamps()
     buildDiscarder(logRotator(numToKeepStr: '3'))
