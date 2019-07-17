@@ -10,10 +10,6 @@ describe('Main App Tests', function() {
     assert.equal([1, 2, 3].indexOf(4), -1);
   });
 
-  it('more calculation', function() {
-    assert.equal(40 + 15, 55);
-  });
-
   // fail
   // it('out of bounds', function() {
   //   assert.equal(1 + 1, 3);
