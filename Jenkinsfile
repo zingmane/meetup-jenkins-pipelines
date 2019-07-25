@@ -1,6 +1,15 @@
 ARCHIVE_FILENAME="my-app.tar.gz"
 DEPLOY_DIR = 'build/deploy'
 
+def slackParams = { GString message ->
+  [
+    teamDomain        : "jenkins-meetup",
+    tokenCredentialId : "jenkins-meetup-slack-token",
+    channel           : "jenkins-meetup",
+    message           : message
+  ]
+}
+
 pipeline {
   agent {
     docker {
@@ -8,14 +17,6 @@ pipeline {
       args '-v ./:/home/node/app'
       args '-v my-app_node_modules:/home/node/app/node_modules/'
     }
-  }
-
-  triggers {
-    GenericTrigger(
-     causeString: 'Triggered with local commit',
-     token: 'very_secret',
-     silentResponse: true,
-    )
   }
 
   options {
@@ -26,7 +27,6 @@ pipeline {
   stages {
     stage('Build Init npm packages') {
       steps {
-
         sh "npm install"
       }
     }
@@ -52,12 +52,16 @@ pipeline {
     }
   }
   post {
-    success{
-      echo "======== pipeline executed successfully ========"
+    success {
+      script {
+        slackSend(slackParams("Build successful: ${env.JOB_NAME} @ ${env.BUILD_NUMBER}"))
+      }
       junit 'artifacts/**/*.xml'
     }
-    failure{
-      echo "======== pipeline execution failed ========"
+    failure {
+      script {
+        slackSend(slackParams("Build failed: ${env.JOB_NAME} @ ${env.BUILD_NUMBER}"))
+      }
     }
   }
 }

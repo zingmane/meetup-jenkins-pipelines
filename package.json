@@ -9,13 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://zingmane@bitbucket.org/zingmane/jenkins-node-pipeline-test.git"
+    "url": "https://github.com/zingmane/meetup-jenkins-pipelines.git"
   },
   "keywords": [
     "jenkins",
     "docker",
     "dockerfile",
-    "node"
+    "node",
+    "pipeline"
   ],
   "author": "mz@campudus.com",
   "license": "MIT",
