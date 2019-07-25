@@ -12,7 +12,7 @@ describe('Main App Tests', function() {
 
   // fail
   it('out of bounds', function() {
-    assert.equal(1 + 1, 3);
+    assert.equal(1 + 1, 2);
   });
 
 });
