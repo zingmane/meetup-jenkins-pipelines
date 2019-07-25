@@ -49,11 +49,4 @@ pipeline {
       }
     }
   }
-  post {
-    success{
-      junit 'artifacts/**/*.xml'
-    }
-    failure{
-    }
-  }
 }
