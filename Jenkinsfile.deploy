@@ -19,7 +19,7 @@ pipeline {
 
     stage('Get and Unpack Artifact') {
       steps {
-        copyArtifacts projectName: 'my-app', target: 'artifacts', flatten: true
+        copyArtifacts projectName: 'meetup-jenkins-pipelines/master', target: 'artifacts', flatten: true
         sh "mkdir -p ${DEPLOY_DIR}"
         sh "tar -xf ./artifacts/${ARCHIVE_FILENAME} -C ./${DEPLOY_DIR} && rm ./artifacts/${ARCHIVE_FILENAME}"
       }
