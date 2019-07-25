@@ -1,5 +1,5 @@
 ARCHIVE_FILENAME="my-app.tar.gz"
-DEPLOY_DIR = 'build/deploy'
+DEPLOY_DIR='build/deploy'
 
 def slackParams = { GString message -> [
   teamDomain        : "jenkins-meetup",
@@ -51,11 +51,9 @@ pipeline {
   }
   post {
     success{
-      slackSend(slackParams("Build successful: ${env.JOB_NAME} @ ${env.BUILD_NUMBER}"))
       junit 'artifacts/**/*.xml'
     }
     failure{
-      slackSend(slackParams("Build failed: ${env.JOB_NAME} @ ${env.BUILD_NUMBER}"))
     }
   }
 }
